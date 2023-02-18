@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Assignment Test</string>
+    <string name="please_wait">Please wait</string>
+    <string name="reset">Reset</string>
+    <string name="history">History</string>
+    <string name="list_empty">List empty</string>
+    <string name="title">Title</string>
+    <string name="result">Result</string>
+</resources>

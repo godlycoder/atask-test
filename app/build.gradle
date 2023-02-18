@@ -1,0 +1,101 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+}
+
+android {
+    namespace Config.packageName
+    compileSdk Config.targetSdk
+
+    defaultConfig {
+        applicationId Config.packageName
+        minSdk Config.minSdk
+        targetSdk Config.targetSdk
+        versionCode Config.versionCode
+        versionName Config.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "mode", "feature"
+
+    productFlavors {
+        red {
+            dimension "mode"
+
+            applicationIdSuffix ".red"
+            versionNameSuffix "-red"
+        }
+
+        green {
+            dimension "mode"
+
+            applicationIdSuffix ".green"
+            versionNameSuffix "-green"
+        }
+
+        file {
+            dimension "feature"
+
+            versionNameSuffix "-filesystem"
+        }
+
+        camera {
+            dimension "feature"
+
+            versionNameSuffix "-built-in-camera"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+
+    api project(Modules.data)
+
+    implementation Libs.coreKtx
+    implementation Libs.appCompat
+    implementation Libs.material
+    implementation Libs.constraintLayout
+
+    implementation Libs.viewModelKtx
+    implementation Libs.activityKtx
+    implementation Libs.lifeCycleExt
+
+    implementation Libs.dexter
+
+    implementation Libs.hiltAndroid
+    kapt Libs.hiltCompiler
+
+    implementation Libs.coroutinesAndroid
+
+    implementation Libs.glide
+
+    implementation Libs.imagePicker
+
+    testImplementation LibsTest.jUnit
+    androidTestImplementation LibsTest.extJUnit
+    androidTestImplementation LibsTest.espressoCore
+}
